@@ -1,0 +1,30 @@
+plugins {
+    id 'nebula.optional-base' version '3.0.3' // if you want optional-base
+    id 'nebula.provided-base' version '3.0.3' // if you want provided-base
+}
+apply plugin: 'groovy'
+apply plugin: 'org.codehaus.griffon.griffon'
+apply plugin: "kotlin"
+griffon {
+    disableDependencyResolution = false
+    includeGroovyDependencies = false
+    version = rootProject.griffonVersion
+}
+
+apply from: rootProject.file('gradle/code-coverage.gradle')
+repositories {
+    jcenter()
+}
+
+
+dependencies {
+    compile project(":griffon-gorm-core")
+    compile project(":griffon-gorm-hibernate-core")
+    compile "org.grails:grails-datastore-gorm-hibernate4:$gormVersion"
+    testRuntime "org.grails:grails-spring:$grailsSpringVersion"
+    testRuntime('com.h2database:h2:1.4.191') { transitive = false }
+    testRuntime "org.slf4j:slf4j-simple:1.7.13"
+    testRuntime "org.codehaus.griffon:griffon-guice:${griffon.version}"
+    testRuntime "org.codehaus.griffon:griffon-groovy:${griffon.version}"
+}
+

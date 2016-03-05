@@ -1,0 +1,16 @@
+= griffon-gorm-plugin
+:linkattrs:
+:project-name: griffon-gorm-plugin
+
+image:https://travis-ci.org/sleonidy/{project-name}.svg?branch=master["Build Status", link="https://travis-ci.org/sleonidy/griffon-gorm-plugin"]
+image:http://img.shields.io/coveralls/sleonidy/{project-name}/master.svg["Coverage Status", link="https://coveralls.io/r/sleonidy/{project-name}"]
+image:http://img.shields.io/badge/license-ASF2-blue.svg["Apache License 2", link="http://www.apache.org/licenses/LICENSE-2.0.txt"]
+image:https://api.bintray.com/packages/sleonidy/griffon-plugins/{project-name}/images/download.svg[link="https://bintray.com/sleonidy/griffon-plugins/{project-name}/_latestVersion"]
+---
+
+The GORM plugin enables  access multiple datasources using link:https://grails.github.io/grails-data-mapping/latest/[GORM, window="_blank"]
+
+
+Refer to the link:http://sleonidy.github.io/{project-name}/[plugin guide, window="_blank"] for
+further information on configuration and usage.
+
