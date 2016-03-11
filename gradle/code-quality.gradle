@@ -5,6 +5,11 @@ apply plugin: 'com.github.hierynomus.license'
 def configDir = new File(buildscript.sourceFile.parentFile.parentFile, 'config')
 ext.checkstyleConfigDir = "$configDir/checkstyle"
 
+license {
+    mapping {
+
+    }
+}
 checkstyle {
     toolVersion = '6.0'
     configFile = new File(checkstyleConfigDir, 'checkstyle.xml')
@@ -51,14 +56,15 @@ license {
     mapping {
         java = 'SLASHSTAR_STYLE'
         groovy = 'SLASHSTAR_STYLE'
+        kt = 'SLASHSTAR_STYLE'
     }
-    ext.year = '2014'
+    ext.year = '2016'
     exclude '**/*.png'
 }
 
-licenseTest {
-    source -= sourceSets.test.resources
-}
+//licenseTest {
+//    source -= sourceSets.test.resources
+//}
 
 if (project.plugins.hasPlugin('groovy')) {
     apply plugin: 'codenarc'
