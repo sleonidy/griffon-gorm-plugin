@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import org.griffon.gorm.internal.AnotherPerson
+import org.griffon.plugins.gorm.internal.AnotherPerson
 
 
 gorm {
@@ -34,6 +34,6 @@ gorm {
     hibernate_internal {
         show_sql = false
     }
-    packages = "org.griffon.gorm.people"
+    packages = "org.griffon.plugins.gorm.people"
     classes = [AnotherPerson]
 }

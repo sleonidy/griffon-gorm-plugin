@@ -1,1 +1,1 @@
-org.griffon.gorm.runtime.Hibernate5GormModule
+org.griffon.plugins.gorm.runtime.Hibernate5GormModule

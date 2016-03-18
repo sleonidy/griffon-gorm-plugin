@@ -13,26 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import org.griffon.plugins.gorm.internal.AnotherPerson
+package org.griffon.plugins.gorm.internal
 
-gorm {
-    hibernate {
-        log_sql = true
-        format_sql = true
-        use_sql_comments = true
-        show_sql = true
-        cache {
-            queries = true
-            use_second_level_cache = true
-            use_query_cache = false
-            region {
-                factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
-            }
-        }
+import grails.persistence.Entity
+import groovy.transform.EqualsAndHashCode
+import groovy.transform.ToString
+
+/**
+ * Created by leonidyanovsky on 9/10/15.
+ */
+@ToString
+@Entity
+@EqualsAndHashCode(includes = ["id"])
+class AnotherPerson implements Serializable {
+    int id
+    String name
+    String lastname
+
+    Map asMap() {
+        [
+                id      : id,
+                name    : name,
+                lastname: lastname
+        ]
     }
-    hibernate_internal {
-        show_sql = false
+    static mapping = {
+        datasource 'internal'
     }
-    packages = "org.griffon.plugins.gorm.people"
-    classes = [AnotherPerson]
 }
