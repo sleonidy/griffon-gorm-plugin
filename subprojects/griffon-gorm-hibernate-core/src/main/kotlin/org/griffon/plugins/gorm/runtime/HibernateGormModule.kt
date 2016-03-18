@@ -13,26 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import org.griffon.plugins.gorm.internal.AnotherPerson
+package org.griffon.plugins.gorm.runtime
 
-gorm {
-    hibernate {
-        log_sql = true
-        format_sql = true
-        use_sql_comments = true
-        show_sql = true
-        cache {
-            queries = true
-            use_second_level_cache = true
-            use_query_cache = false
-            region {
-                factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
-            }
-        }
+import griffon.core.Configuration
+import griffon.core.injection.Module
+import griffon.inject.DependsOn
+import griffon.util.AnnotationUtils
+import javax.inject.Named
+
+/**
+ * Created by Leon on 26-Feb-16.
+ */
+@DependsOn("datasource")
+@Named("gorm")
+abstract class HibernateGormModule : GormModule(), Module {
+    override fun doConfigure() {
+        super.doConfigure()
+
+        bind(Configuration::class.java)
+                .withClassifier(AnnotationUtils.named("gorm"))
+                .to(DefaultGormHibernateConfiguration::class.java)
+                .asSingleton()
     }
-    hibernate_internal {
-        show_sql = false
-    }
-    packages = "org.griffon.plugins.gorm.people"
-    classes = [AnotherPerson]
 }
