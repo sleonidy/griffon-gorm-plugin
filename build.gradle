@@ -101,7 +101,11 @@ subprojects { subproj ->
         dependencies {
             testCompile 'junit:junit:4.12'
             testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
-            testCompile 'org.slf4j:slf4j-simple:1.7.19'
+            testCompile 'org.slf4j:slf4j-simple:1.7.21'
+            testRuntime('com.h2database:h2:1.4.192') { transitive = false }
+            testRuntime "org.codehaus.griffon:griffon-guice:${griffonVersion}"
+            testRuntime "org.codehaus.griffon:griffon-groovy:${griffonVersion}"
+
         }
 
         task sourceJar(type: Jar) {

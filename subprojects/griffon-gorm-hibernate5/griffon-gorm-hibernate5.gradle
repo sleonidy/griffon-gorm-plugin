@@ -18,11 +18,8 @@ dependencies {
     compile project(":griffon-gorm-hibernate-core")
     compile "org.grails:grails-datastore-gorm-hibernate5:$gormVersion"
 
-    testRuntime "org.grails:grails-spring:$grailsSpringVersion"
-    testRuntime('com.h2database:h2:1.4.191') { transitive = false }
-    testRuntime "org.slf4j:slf4j-simple:1.7.13"
-    testRuntime "org.codehaus.griffon:griffon-guice:${griffon.version}"
-    testRuntime "org.codehaus.griffon:griffon-groovy:${griffon.version}"
+    testRuntime "org.apache.tomcat:tomcat-jdbc:8.5.0"
+    testRuntime "org.apache.tomcat.embed:tomcat-embed-logging-log4j:8.5.0"
 }
 
 

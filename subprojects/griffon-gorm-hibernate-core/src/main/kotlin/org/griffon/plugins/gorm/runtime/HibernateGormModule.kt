@@ -29,10 +29,11 @@ import javax.inject.Named
 abstract class HibernateGormModule : GormModule(), Module {
     override fun doConfigure() {
         super.doConfigure()
-
+        // tag::bindings[]
         bind(Configuration::class.java)
                 .withClassifier(AnnotationUtils.named("gorm"))
                 .to(DefaultGormHibernateConfiguration::class.java)
                 .asSingleton()
+        // end::bindings[]
     }
 }

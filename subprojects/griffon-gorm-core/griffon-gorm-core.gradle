@@ -20,11 +20,6 @@ dependencies {
     compile 'org.codehaus.griffon.plugins:griffon-datasource-core:1.2.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
-    testRuntime "org.grails:grails-spring:3.1.1"
-    testRuntime('com.h2database:h2:1.4.191') { transitive = false }
-    testRuntime "org.slf4j:slf4j-simple:1.7.13"
-    testRuntime "org.codehaus.griffon:griffon-guice:${griffon.version}"
-    testRuntime "org.codehaus.griffon:griffon-groovy:${griffon.version}"
 }
 
 
