@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import org.griffon.plugins.gorm.internal.AnotherPerson
+import org.griffon.plugins.gorm.people.Person
 
 gorm {
     hibernate {
@@ -25,14 +26,14 @@ gorm {
             queries = true
             use_second_level_cache = true
             use_query_cache = false
-            region {
-                factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
-            }
+//            region {
+//                factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
+//            }
         }
     }
     hibernate_internal {
         show_sql = false
     }
     packages = "org.griffon.plugins.gorm.people"
-    classes = [AnotherPerson]
+    classes = [AnotherPerson, Person]
 }

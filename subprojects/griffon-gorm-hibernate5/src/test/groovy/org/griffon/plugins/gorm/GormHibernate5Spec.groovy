@@ -94,10 +94,10 @@ class GormHibernate5Spec extends Specification {
             new AnotherPerson([id: 1, name: 'Danno', lastname: 'Ferrin']).save()
         }
         def anotherPersonOut = AnotherPerson.withTransaction {
-            AnotherPerson.findById(1)
+            AnotherPerson.findAll()
         }
         then:
-        anotherPersonIn == anotherPersonOut
+        anotherPersonIn == anotherPersonOut[0]
     }
 
     void 'execute statements on not mapped person throws exception'() {

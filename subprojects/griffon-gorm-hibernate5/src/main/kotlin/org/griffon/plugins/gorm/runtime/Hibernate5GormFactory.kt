@@ -15,9 +15,10 @@
  */
 package org.griffon.plugins.gorm.runtime
 
-import grails.orm.bootstrap.HibernateDatastoreSpringInitializer
 import griffon.core.Configuration
 import griffon.core.GriffonApplication
+import org.grails.datastore.mapping.core.DatastoreUtils
+import org.grails.orm.hibernate.HibernateDatastore
 import javax.annotation.Nonnull
 import javax.inject.Inject
 import javax.inject.Named
@@ -31,9 +32,9 @@ class Hibernate5GormFactory @Inject constructor(@Nonnull @Named("gorm") configur
         event("GormCreateStart", listOf(GORM_CONFIG))
         super.create()
         val configurationMap = getConfigurationAsMap()
-        val initializer = HibernateDatastoreSpringInitializer(configurationMap)
-        applyConfigToInitializer(initializer)
-        initializer.configureForDataSources(dataSourceNameToDataSource)
+
+        val classes = (storage.get("classes") as List<Class<Any>>).toTypedArray()
+        HibernateDatastore(DatastoreUtils.createPropertyResolver(configurationMap as Map<String, Any>?),*classes)
         event("GormCreateEnd", listOf(GORM_CONFIG))
     }
 }

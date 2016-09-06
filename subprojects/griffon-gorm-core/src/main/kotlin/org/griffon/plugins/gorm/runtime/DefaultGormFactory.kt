@@ -15,11 +15,14 @@
  */
 package org.griffon.plugins.gorm.runtime
 
+
+import grails.persistence.Entity
 import griffon.core.Configuration
 import griffon.core.GriffonApplication
 import griffon.plugins.datasource.DataSourceFactory
 import griffon.plugins.datasource.DataSourceStorage
 import griffon.util.ConfigUtils
+import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner
 import org.grails.datastore.gorm.bootstrap.AbstractDatastoreInitializer
 import org.griffon.plugins.gorm.api.GormBootstrap
 import org.griffon.plugins.gorm.api.GormFactory
@@ -29,7 +32,6 @@ import javax.annotation.Nonnull
 import javax.inject.Inject
 import javax.inject.Named
 import javax.sql.DataSource
-
 
 
 abstract class DefaultGormFactory @Inject constructor(@Nonnull @Named("gorm") val configuration: Configuration, @Nonnull val application: GriffonApplication) :
@@ -65,13 +67,18 @@ abstract class DefaultGormFactory @Inject constructor(@Nonnull @Named("gorm") va
 
     }
 
-    fun getMapOfDataSourceNameToConfiguration(): Map<String, Map<*, *>> {
-        return dataSourceFactory.dataSourceNames.associate {
-            if (it == "default")
-                "dataSource" to dataSourceFactory.getConfigurationFor(it)
-            else
-                it to dataSourceFactory.getConfigurationFor(it)
-        }
+    fun getMapOfDataSourceNameToConfiguration(): Map<String, Map<String, *>> {
+        return dataSourceFactory
+                .dataSourceNames
+                .groupBy {
+                    return@groupBy if (it == "default")
+                        "dataSource"
+                    else
+                        "dataSources"
+                }
+                .mapValues {
+                    it.value.associate { it to dataSourceFactory.getConfigurationFor(it) }
+                }
     }
 
     override fun getConfigurationAsMap(): MutableMap<String, Map<*, *>> {
@@ -83,13 +90,17 @@ abstract class DefaultGormFactory @Inject constructor(@Nonnull @Named("gorm") va
     @Suppress("UNCHECKED_CAST")
     fun readConfig(configuration: Configuration) {
         val config = configuration.get(GORM_CONFIG) as Map<String, Any>
-
+        val classes = mutableListOf<Class<out Any>>()
         if (config.contains(PACKAGES)) {
-            val packages = ConfigUtils.getConfigValueAsString(config, PACKAGES, "")!!
-            storage.set(PACKAGES, packages.split(","))
+            val packages = ConfigUtils.getConfigValueAsString(config, PACKAGES, "")!!.split(",")
+            storage.set(PACKAGES, packages)
+
+            FastClasspathScanner(*packages.toTypedArray())
+                    .matchClassesWithAnnotation(Entity::class.java, {classes.add(it)})
+                    .scan()
         }
         if (config.contains(CLASSES)) {
-            val classes = ConfigUtils.getConfigValue<List<Class<*>>>(config, CLASSES)!!
+            classes += ConfigUtils.getConfigValue<List<Class<*>>>(config, CLASSES)!!
             storage.set(CLASSES, classes)
         }
     }

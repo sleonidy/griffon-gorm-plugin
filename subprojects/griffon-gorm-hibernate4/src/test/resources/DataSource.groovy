@@ -54,7 +54,7 @@ dataSources {
         driverClassName = 'org.h2.Driver'
         username = 'sa'
         password = ''
-        dbCreate = 'skip'
+        dbCreate = 'update'
         url = 'jdbc:h2:mem:@application.name@-internal'
     }
     people {

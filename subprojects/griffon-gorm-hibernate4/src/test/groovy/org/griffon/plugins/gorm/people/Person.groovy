@@ -17,10 +17,11 @@ package org.griffon.plugins.gorm.people
 
 import grails.persistence.Entity
 import groovy.transform.ToString
+import org.grails.datastore.gorm.GormEntity
 
 @ToString
 @Entity
-class Person implements Serializable {
+class Person implements GormEntity<Person>, Serializable {
     int id
     String name
     String lastname

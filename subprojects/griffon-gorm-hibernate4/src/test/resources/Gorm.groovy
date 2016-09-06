@@ -1,3 +1,4 @@
+import org.griffon.plugins.gorm.internal.AnotherPerson
 /*
  * Copyright 2016 the original author or authors.
  *
@@ -13,9 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import org.griffon.plugins.gorm.internal.AnotherPerson
-
-
 gorm {
     hibernate {
         log_sql = true
@@ -26,9 +24,9 @@ gorm {
             queries = true
             use_second_level_cache = true
             use_query_cache = false
-            region {
-                factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
-            }
+//            region {
+//                factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
+//            }
         }
     }
     hibernate_internal {

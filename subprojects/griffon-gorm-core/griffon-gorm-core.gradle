@@ -17,8 +17,10 @@ repositories {
 
 dependencies {
     compile "org.grails:grails-datastore-gorm:$gormVersion"
+    compile "org.grails:grails-core:3.0.15"
     compile 'org.codehaus.griffon.plugins:griffon-datasource-core:1.2.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compile "io.github.lukehutch:fast-classpath-scanner:2.0.1"
 
 }
 
