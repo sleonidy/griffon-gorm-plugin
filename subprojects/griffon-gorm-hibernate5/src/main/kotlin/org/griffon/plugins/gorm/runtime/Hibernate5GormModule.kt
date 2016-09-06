@@ -15,12 +15,10 @@
  */
 package org.griffon.plugins.gorm.runtime
 
-import grails.orm.bootstrap.HibernateDatastoreSpringInitializer
 import griffon.core.Configuration
 import griffon.core.injection.Module
 import griffon.inject.DependsOn
 import griffon.util.AnnotationUtils
-import org.grails.datastore.gorm.bootstrap.AbstractDatastoreInitializer
 import org.griffon.plugins.gorm.api.GormFactory
 import javax.inject.Named
 
@@ -32,9 +30,6 @@ import javax.inject.Named
 class Hibernate5GormModule : HibernateGormModule(), Module {
     override fun doConfigure() {
         super.doConfigure()
-        bind(AbstractDatastoreInitializer::class.java)
-                .to(HibernateDatastoreSpringInitializer::class.java)
-                .asSingleton()
         bind(GormFactory::class.java)
                 .to(Hibernate5GormFactory::class.java)
                 .asSingleton()
