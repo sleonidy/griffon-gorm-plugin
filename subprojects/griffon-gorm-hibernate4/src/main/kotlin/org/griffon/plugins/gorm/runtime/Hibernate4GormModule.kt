@@ -30,6 +30,7 @@ import javax.inject.Named
 class Hibernate4GormModule : HibernateGormModule(), Module {
     override fun doConfigure() {
         super.doConfigure()
+        // tag::bindings[]
         bind(GormFactory::class.java)
                 .to(Hibernate4GormFactory::class.java)
                 .asSingleton()
@@ -37,5 +38,6 @@ class Hibernate4GormModule : HibernateGormModule(), Module {
                 .withClassifier(AnnotationUtils.named("gorm"))
                 .to(DefaultGormHibernate5Configuration::class.java)
                 .asSingleton()
+        // end::bindings[]
     }
 }

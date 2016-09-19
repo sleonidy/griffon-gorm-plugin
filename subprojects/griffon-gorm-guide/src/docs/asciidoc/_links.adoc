@@ -1,2 +1,4 @@
 
+:link_hibernate5: link:http://hibernate.org/orm/[Hibernate, window="_blank"]
+:link_gorm: link:https://grails.github.io/grails-data-mapping/latest/[Gorm,window="_blank"]
 

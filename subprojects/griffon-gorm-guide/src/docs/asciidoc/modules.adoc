@@ -1,25 +1,43 @@
 
 [[_modules]]
 = Modules
-:subproject-base: {rootdir}/subprojects/griffon-hibernate5-
-:java-source: /src/main/java/
-:package-base: org/griffon/plugins/runtime/hibernate5
+:subproject-base: {rootdir}/subprojects/
+:kotlin-source: src/main/kotlin/
+:package-core: griffon-gorm-core/
+:package-hibernate-core: griffon-gorm-hibernate-core/
+:package-hibernate4: griffon-gorm-hibernate4/
+:package-hibernate5: griffon-gorm-hibernate5/
+:package-base: org/griffon/plugins/gorm/runtime/
 :numbered:
 
 The following sections display all bindings per module. Use this information to
 successfully override a binding on your own modules or to troubleshoot a module
 binding if the wrong type has been applied by the Griffon runtime.
 
-
-== Hibernate4
-
-Module name: `hibernate4`
+== Core
+Module name: `core`
 
 Depends on: `datasource`
-
-[source,java,options="nowrap"]
+[source,kotlin,options="nowrap"]
 ----
-include::{subproject-base}core{java-source}{package-base}/Hibernate5Module.java[tags=bindings,indent=0]
+include::{subproject-base}{package-core}{kotlin-source}{package-base}GormModule.kt[tags=bindings,indent=0]
+----
+== Hibernate-Core
+Module name: `hibernate core`
+[source,kotlin,options="nowrap"]
+----
+include::{subproject-base}{package-hibernate-core}{kotlin-source}{package-base}HibernateGormModule.kt[tags=bindings,indent=0]
+----
+
+== Hibernate4
+Module name: `hibernate4`
+
+Depends on: `hibernate-core`
+
+[source,kotlin,options="nowrap"]
+----
+include::{subproject-base}
+include::{subproject-base}{package-hibernate4}{kotlin-source}{package-base}Hibernate4GormModule.kt[tags=bindings,indent=0]
 ----
 
 == Hibernate5
@@ -28,7 +46,8 @@ Module name: `hibernate5`
 
 Depends on: `datasource`
 
-[source,java,options="nowrap"]
+[source,kotlin,options="nowrap"]
 ----
-include::{subproject-base}core{java-source}{package-base}/Hibernate5Module.java[tags=bindings,indent=0]
+include::{subproject-base}
+include::{subproject-base}{package-hibernate5}{kotlin-source}{package-base}Hibernate5GormModule.kt[tags=bindings,indent=0]
 ----

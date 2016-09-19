@@ -29,6 +29,7 @@ import java.util.*
 abstract class GormModule : AbstractModule() {
 
     override fun doConfigure() {
+        // tag::bindings[]
         bind(ResourceBundle::class.java)
                 .withClassifier(named("gorm"))
                 .toProvider(ResourceBundleProvider("Gorm"))
@@ -47,7 +48,7 @@ abstract class GormModule : AbstractModule() {
 
         bind(GriffonAddon::class.java)
                 .to(GormAddon::class.java).asSingleton()
-
+        // end::bindings[]
     }
 }
 

@@ -6,7 +6,9 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'
+        classpath ('org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'){
+            exclude group:'groovy'
+        }
         classpath 'com.bmuschko:gradle-java2html-plugin:2.0'
     }
 }
@@ -15,7 +17,10 @@ apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'com.bmuschko.java2html'
 
 ext.childProjects = [
-        ':griffon-gorm-core'
+        ':griffon-gorm-core',
+        ':griffon-gorm-hibernate-core',
+        ':griffon-gorm-hibernate4',
+        ':griffon-gorm-hibernate5'
 ]
 
 ext.childProjects.each { evaluationDependsOn it }
@@ -36,6 +41,7 @@ task copyDocs(type: Copy) {
             from(project(projectName).sourceSets.main.allSource) {
                 include '**/*.java'
                 include '**/*.groovy'
+                include '**/*.kt'
                 include '**/*.html'
             }
         }
@@ -99,7 +105,7 @@ task javadocJar(type: Jar, dependsOn: apiDocs) {
     from apiDocs.destinationDir
 }
 
-task sourceHtmlJar(type: Jar, dependsOn: java2html) {
+task sourceHtmlJar(type: Jar, dependsOn: java2htmlConvertCode) {
     archiveName = "${pluginBaseName}-plugin-${version}-sources-html.jar"
     destinationDir = "${buildDir}/assemble/jars" as File
     from java2htmlConvertCode.destDir

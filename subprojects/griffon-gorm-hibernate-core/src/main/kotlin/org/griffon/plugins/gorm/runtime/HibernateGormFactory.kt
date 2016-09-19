@@ -38,15 +38,15 @@ abstract class HibernateGormFactory @Inject constructor(@Nonnull @Named("gorm") 
     fun getHibernateConfigurationAsMapOfDataSourceNameToConfigurationMap(): Map<String, Map<*, *>> {
         return dataSourceFactory.dataSourceNames.associate {
             val dataSourceName = if (it == "default") "" else it
-            var config: MutableMap<Any, Any> = HashMap()
-            if (configuration.get("$GORM_CONFIG.${HIBERNATE}") != null) {
-                config.putAll(configuration.get("$GORM_CONFIG.${HIBERNATE}") as Map<Any, Any>)
+            val config: MutableMap<Any, Any> = HashMap()
+            if (configuration.get("$GORM_CONFIG.$HIBERNATE") != null) {
+                config.putAll(configuration.get("$GORM_CONFIG.$HIBERNATE") as Map<Any, Any>)
             }
             if (configuration.get("$GORM_CONFIG.${HIBERNATE}_$dataSourceName") != null) {
                 config.putAll(configuration.get("$GORM_CONFIG.${HIBERNATE}_$dataSourceName") as Map<Any, Any>)
             }
             if (dataSourceName.isBlank())
-                "${HIBERNATE}" to config
+                "$HIBERNATE" to config
             else
                 "${HIBERNATE}_$dataSourceName" to config
 

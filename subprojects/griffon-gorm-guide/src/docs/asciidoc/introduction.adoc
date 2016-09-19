@@ -2,3 +2,4 @@
 [[_introduction]]
 = Introduction
 
+The Gorm plugin enables access to datasources using {link_gorm}
